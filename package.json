@@ -9,7 +9,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon backend/server",
-    "start": "node server.js"
+    "start": "node backend/server.js"
   },
   "author": "",
   "license": "ISC",
