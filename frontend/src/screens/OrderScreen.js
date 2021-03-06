@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { PayPalButton } from "react-paypal-button-v2";
 import { LoadingBox } from "../components/LoadingBox";
 import { MessageBox } from "../components/MessageBox";
-import { detailsOrder, payOrder } from "../redux/actions/OrderActions";
+import { detailsOrder } from "../redux/actions/OrderActions";
 
 const OrderScreen = (props) => {
   const [sdkReady, setSdkReady] = useState(false);
@@ -12,7 +12,6 @@ const OrderScreen = (props) => {
   const { loading, order, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  const { error: errorPay, success: successPay } = orderPay;
 
   console.log(orderDetails);
 
