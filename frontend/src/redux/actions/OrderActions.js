@@ -8,7 +8,6 @@ import {
   ORDER_DETAILS_SUCCESS,
   ORDER_PAY_REQUEST,
   ORDER_PAY_FAIL,
-  ORDER_PAY_RESET,
   ORDER_PAY_SUCCESS
 } from "../actionTypes";
 
@@ -19,17 +18,20 @@ export const createdOrder = (order) => async (dispatch, getState) => {
     const {
       userSignIn: { userInfo },
     } = getState();
-    const request = await fetch("http://localhost:4000/api/orders", {
-      method: "POST",
-      body: JSON.stringify({
-        cart: order.cart,
-        orderItems: order.orderItems,
-      }),
-      headers: {
-        "content-type": "Application/Json",
-        authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const request = await fetch(
+      "https://elie-project.herokuapp.com/api/orders",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          cart: order.cart,
+          orderItems: order.orderItems,
+        }),
+        headers: {
+          "content-type": "Application/Json",
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
     if (request.ok) {
       const order = await request.json();
       console.log(order);
@@ -53,12 +55,15 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     userSignIn: { userInfo },
   } = getState();
   try {
-    const request = await fetch(`http://localhost:4000/api/orders/${orderId}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const request = await fetch(
+      `https://elie-project.herokuapp.com/api/orders/${orderId}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
     if (request.ok) {
       const data = await request.json();
       dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
@@ -80,13 +85,16 @@ export const payOrder = (order, paymentResult) => async (
   } = getState();
 
   try {
-    const request = await fetch(`http://localhost:4000/api/orders/${order._id}/pay`, {
-      method: "POST",
-      body:JSON.stringify(paymentResult),
-      headers: {
-        authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const request = await fetch(
+      `https://elie-project.herokuapp.com/api/orders/${order._id}/pay`,
+      {
+        method: "POST",
+        body: JSON.stringify(paymentResult),
+        headers: {
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
     if (request.ok) {
       const data = await request.json();
       dispatch({ type: ORDER_PAY_SUCCESS, payload: data });

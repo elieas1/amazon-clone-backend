@@ -14,18 +14,21 @@ export const signin = (email, password) => async (dispatch) => {
     payload: { email, password },
   });
   try {
-    const data = await fetch("http://localhost:4000/api/users/signin", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-      },
-      credentials: "same-origin",
-    });
+    const data = await fetch(
+      "https://elie-project.herokuapp.com/api/users/signin",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json, text/plain, */*",
+        },
+        credentials: "same-origin",
+      }
+    );
     if (data.ok) {
       const response = await data.json();
       dispatch({
@@ -59,19 +62,22 @@ export const register = (username, email, password) => async (dispatch) => {
     type: USER_REGISTER_REQUEST,
   });
   try {
-    const data = await fetch("http://localhost:4000/api/users/register", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-      },
-      credentials: "same-origin",
-    });
+    const data = await fetch(
+      "https://elie-project.herokuapp.com/api/users/register",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json, text/plain, */*",
+        },
+        credentials: "same-origin",
+      }
+    );
     if (data.ok) {
       const response = await data.json();
       dispatch({

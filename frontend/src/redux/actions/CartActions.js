@@ -6,7 +6,7 @@ import {
 } from "../actionTypes";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  fetch(`http://localhost:4000/api/products/${id}`)
+  fetch(`https://elie-project.herokuapp.com/api/products/${id}`)
     .then((response) => response.json())
     .then((data) => {
       dispatch({
@@ -20,7 +20,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
           qty: qty,
         },
       });
-      console.log(getState())
+      console.log(getState());
       localStorage.setItem(
         "cartItems",
         JSON.stringify(getState().cart.cartItems)
